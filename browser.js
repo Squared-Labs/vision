@@ -1,6 +1,13 @@
 window.onresize = doLayout;
 var isLoading = false;
 
+console.log("Hey there! If you want to open up DevTools, run devTools().")
+
+
+function devTools() {
+  document.getElementsByTagName("webview")[0].openDevTools();
+}
+
 onload = function() {
   var webview = document.querySelector('webview');
   doLayout();
@@ -362,3 +369,18 @@ function closeBoxes() {
   closeZoomBox();
   closeFindBox();
 }
+
+document.addEventListener('keydown',function(e){
+
+  //CTRL + SHIFT + something
+  if(e.ctrlKey && e.shiftKey){
+    switch(e.code){
+
+      case 'KeyI':
+        document.getElementsByTagName("webview")[0].openDevTools();
+        break;
+
+    }
+  }
+
+});

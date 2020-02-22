@@ -1,5 +1,5 @@
 // Load Electron modules
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, globalShortcut, contents } = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -17,10 +17,14 @@ function createWindow () {
 
   // Load browser
   mainWindow.loadFile('browser.html')
+  globalShortcut.register('Control+Shift+I', () => {
+    return mainWindow.webContents.executeJavaScript(`
+    document.getElementsByTagName("webview")[0].openDevTools();
+    `)
+  })
 
-  // devtools
-  // mainWindow.webContents.openDevTools()
 }
+// mainWindow.webContents.openDevTools()  
 
 // Window create
 app.on('ready', createWindow)
