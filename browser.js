@@ -159,7 +159,7 @@ function navigateTo(url) {
         } else if (http === 'http://') {
           document.querySelector('webview').src = url;
       } else if (about === 'vision://about') {
-          document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/"
+          document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
         } else {
           document.querySelector('webview').src = 'http://'+ url;
         }
