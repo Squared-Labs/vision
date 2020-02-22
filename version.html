@@ -1,0 +1,160 @@
+
+<!doctype html>
+
+<!--
+about:version template page
+-->
+
+<html id="t" dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>About Version</title>
+  </head>
+
+  <body>
+      <style>
+          /* SND, version page was based on the Chromium version page */
+
+html {
+  --google-grey-200: rgb(232, 234, 237);
+  --google-grey-900: rgb(32, 33, 36);
+
+  --primary-color: var(--google-grey-900);
+  background: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --primary-color: var(--google-grey-200);
+    background: var(--google-grey-900);
+  }
+}
+
+body {
+  color: var(--primary-color);
+  font-family: Tahoma;
+  font-size: 100%;
+  margin: 0;
+}
+
+#outer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  min-width: 800px;
+  width: 60%;
+}
+
+#inner {
+  padding-top: 10px;
+  word-break: break-word;
+}
+
+.label {
+  font-size: 0.9em;
+  font-weight: bold;
+  padding-inline-end: 5px;
+  text-align: end;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.label::after {
+  content: ':';
+}
+
+#logo {
+  float: right;
+  margin-left: 40px;
+  text-align: right;
+  width: 180px;
+}
+
+#company {
+  font-size: 0.7em;
+  text-align: right;
+}
+
+#copyright {
+  font-size: 0.7em;
+  text-align: right;
+}
+
+#useragent {
+  font-family: monospace;
+}
+
+.version {
+  font-family: monospace;
+  max-width: 430px;
+  padding-left: 5px;
+  vertical-align: bottom;
+}
+
+.version-wide {
+  font-family: monospace;
+  max-width: auto;
+  padding-left: 5px;
+  vertical-align: bottom;
+}
+      </style>
+    <div id="outer">
+      <div id="logo">
+        <picture>
+          <img src="https://i.imgur.com/CanlOtp.png">
+        </picture>
+
+
+        <div id="company">SaturdayNightDead</div>
+        <div id="copyright">2020 SaturdayNightDead (credits to hokein on GitHub for creating the base webView implementation that I could not create with BrowserView). Available on <a href="https://github.com/beanedtaco/vision">GitHub</a>.</div>
+      </div>
+      <table id="inner" cellpadding="0" cellspacing="0">
+        <tr><td class="label">Vision Browser</td>
+          <td class="version" id="version">
+            <span>20.02.01 (base v1)</span>
+            (<span>Official Build</span>)
+            <span></span>
+            <span>(Universal (64-bit + 32-bit) builds</span>
+
+            <span>(Electron)</span>
+
+          </td>
+        </tr>
+        <tr>
+          <td class="label">Revision</td>
+          <td class="version">
+            <span>2020_february_rev01</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">OS</td>
+          <td class="version" id="os_type">
+            <span>Windows</span>
+
+
+            <span id="os_version"></span>
+
+          </td>
+        </tr>
+
+
+
+
+        <tr><td class="label">JavaScript</td>
+          <td class="version" id="js_engine">
+            <span>Node.js</span>
+            <span>[Bundled with Electron]</span>
+          </td>
+        </tr>
+        
+            <tr><td class="label">Package Date</td>
+          <td class="version" id="Package Date">
+            <span>21/22 February 2020</span>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </body>
+</html>

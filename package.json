@@ -1,0 +1,23 @@
+{
+  "name": "visionbrowser",
+  "version": "20.02..01 (base v1)",
+  "description": "Vision Browser, a browser built with Electron.",
+  "main": "main.js",
+  "scripts": {
+    "start": "npx electron ."
+  },
+  "repository": "https://github.com/BeanedTaco/vision",
+  "keywords": [
+    "Browser",
+    "Made with Electron",
+    "Vision Browser"
+  ],
+  "author": "SaturdayNightDead",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^8.0.1"
+  },
+  "dependencies": {
+    "electron-packager": "^14.2.1"
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="browser.css">
+    <script src="browser.js"></script>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  </head>
+  <body>
+    <div id="title-bar" class="grey lighten-2">
+      <div id="title" class="window-button">
+        <a class="breadcrumb">Vision Browser</a>
+      </div>
+      <div id="title-bar-btns">
+        <img src="https://i.imgur.com/zpdg8Rk.png" width="36" height="36" class="windowclose" onclick="window.close()">
+      </div>
+    </div>
+
+    <div id="controls">
+
+      <button id="back" title="Go Back" disabled="true">&#9664;</button>
+      <button id="forward" title="Go Forward" disabled="true">&#9654;</button>
+      <button id="home" title="Go Home">&#127968;</button>
+      <button id="reload" title="Reload">&#128259;</button>
+
+      <form id="location-form">
+        <div id="center-column">
+          <input id="location" type="text" value="http://www.github.com/">
+        </div>
+        <input type="submit" value="&#128270;">
+      </form>
+
+      <button id="zoom" title="Change Zoom">&#128270;</button>
+      <button id="find" title="Find in Page">&#128294;</button>
+
+    </div>
+
+    <div id="zoom-box">
+      <form id="zoom-form">
+        <input id="zoom-text" type="text">
+        <input type="submit" value="&#128270;">
+        <button id="zoom-in">&#10133;</button>
+        <button id="zoom-out">&#10134;</button>
+      </form>
+    </div>
+
+    <div id="find-box">
+      <form id="find-form">
+        <input id="find-text" type="text">
+        <div id="find-results"></div>
+        <input type="submit" style="position:absolute; visibility:hidden">
+        <button id="match-case">aA</button>
+        <button id="find-backward">&#60;</button>
+        <button id="find-forward">&#62;</button>
+      </form>
+    </div>
+
+    <webview src="https://web.tabliss.io/"></webview>
+
+    <div id="sad-webview">
+      <div id="sad-webview-icon">&#9762;</div>
+      <h2 id="crashed-label">Oops!</h2>
+      <h2 id="killed-label">He fell into a snag.</h2>
+
+      <p>Oopsie poopsies! Wumpus fell into a snag, yeesh. Anyways, this webpage couldn't load. Refresh the page, go to a different page, or try again.</p>
+    </div>
+  </body>
+</html>
