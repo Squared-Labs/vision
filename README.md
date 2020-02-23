@@ -8,6 +8,7 @@ Each release of Vision uses *two* version identifiers/numbers.
 
 ### Year-Month-Revision Version Number/ID (Y-M-R)
 Example: 20.02.01
+
 Format: yy.mm.vr
 
 *yy represents the two-digit, mm represents the two-digit month, and vr represents the version revision (more digits can be added for this one!)*
