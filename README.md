@@ -18,7 +18,7 @@ Format: yy.mm.vr
 
 **This version number format is the de-facto format, meaning that version numbers will normally be presented in this way (with a few exceptions).**
 
-### Semantic Version Number/ID (semV)
+### Semantic Version Number/ID (semV; README may also reference semantic versions under the name "API" or "APIv*x*")
 Example: 1.0.0
 
 *Learn more about semantic versioning [here](https://semver.org/).*
@@ -31,8 +31,17 @@ For versions of Vision beyond v20.02.02/semV1.0.0.2, the package.json versions a
 *However*, for versions v20.02.01/semV1.0.0 and v20.02.02, the package.json versions are presented using the *Y-M-R* version number, followed by the *semantic* ___major___ version number. For example, v20.02.02's package.json version is ``v20.02.02 (base v1)``.
 
 ## Why are all base v1.x releases listed as "pre-release"?
-Base v1 is very minimal and unstable. It uses the Electron ``webview`` tag, which is based on Chromium's ``webview``. As the latter is undergoing large architectural changes, many bugs are present in ``webview``. Thus, I have deemed base v1.x releases as *unstable and not meant for production use*.
+Base v1 is very minimal and unstable. It uses the Electron ``webview`` tag, which is based on Chromium's ``webview``. As the latter is undergoing large architectural changes, many bugs are present with it. Thus, I have deemed base v1.x releases as *unstable and not meant for production use*.
 
-### Are there any solutions to this?
-#### (Please note that anytime I mention "API" or "API version", I am referring to the semantic version.)
-Electron has implemented ``BrowserView`` as a viable solution ~~but as it is hosted in the main process (as opposed to the rendering process), I cannot currently use this method since I can't currently figure out how to use Electron remotes *for the life of me*~~. I've recently figured out how to use Electron remotes, meaning that API 2.0 will use BrowserView instead of ``webview``. **By the way, as of right now, I don't plan to include a UI redesign in API 2.0 (with all the changes being under-the-hood), but this may change in the future.**
+## What about APIv2?
+Vision APIv2 is currently under development. I'm working on rebuilding the back-bone of Vision from the ground up, using the much stable BrowserView engine instead of the Chromium-provided ``webview`` engine. A redesign is also planned, but this may change in the future.
+
+### Why use BrowserView instead of ``webview``?
+Electron's implementation of ``webview`` is derived from Chromium's implementation of the tag/engine. Currently, it is undergoing ***massive*** structural changes and is very much unstable.
+
+Electron's team has implemented an alternative to the ``webview`` engine/tag, named BrowserView. It is very much more stable and faster in terms of performance because it uses the core Electron process as opposed to ``webview``, which uses the renderer process. Additionally, it allows the webpage to be in a fixed position that overlays any other element of the page [including window elements], making it drastically easier to frame webpage content.
+
+Previously, Vision has been unable to utilize the BrowserView engine because I was previously unable to use Electron remotes. Now that I am able to use remotes, BrowserView-rendered webpages are now possible. Also, ``webview`` has many program-breaking issues (see [this](https://github.com/electron/electron/issues/8505) and [this](https://github.com/electron/electron/issues/6139)) and BrowserView completely eliminates these issues.  
+
+### I utilize registry values and/or GPOs (or local group policies). Will APIv2 include support for these?
+This is *not* currently planned. This may come at some point *after* v2.
