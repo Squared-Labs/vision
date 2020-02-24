@@ -1,6 +1,6 @@
 {
   "name": "visionbrowser",
-  "version": "1.0.0.2",
+  "version": "1.0.1",
   "description": "Vision Browser, a browser built with Electron.",
   "main": "main.js",
   "scripts": {

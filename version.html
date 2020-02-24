@@ -8,11 +8,68 @@ about:version template page
 <html id="t" dir="ltr" lang="en">
   <head>
     <meta charset="utf-8">
-    <title>About Version</title>
+    <title>About Vision</title>
   </head>
 
   <body>
       <style>
+
+.windowclose:hover {
+background-color: crimson
+}
+
+#title-bar {
+  -webkit-app-region: drag;
+  height: 30px;
+  padding: none;
+  margin: 0px;
+}
+
+
+#title {
+  position: fixed;
+  top: 0px;
+  left: 6px;
+  font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#title-bar-btns {
+  -webkit-app-region: no-drag;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
+.closae {
+background-color: red
+
+}
+
+.window-button {
+  height: 30px !important;
+  line-height: 30px;
+  padding: 0 0.5rem;
+
+}
+
+.window-button:hover {
+  filter: brightness(85%);
+}
+
+.breadcrumb:before {
+  color: #343434;
+  font-size: 1.2em;
+}
+
+.breadcrumb,
+.breadcrumb:last-child {
+  color: #343434;
+  font-size: 0.9em;
+}
+
+.breadcrumb:first-child{
+font-weight: bold;
+}
           /* SND, version page was based on the Chromium version page */
 
 html {
@@ -98,6 +155,14 @@ body {
   vertical-align: bottom;
 }
       </style>
+      <div id="title-bar" class="grey lighten-2">
+        <div id="title" class="window-button">
+          <a class="breadcrumb">About Vision</a>
+        </div>
+        <div id="title-bar-btns">
+          <img src="https://i.imgur.com/zpdg8Rk.png" width="36" height="36" class="windowclose" onclick="window.close()">
+        </div>
+      </div>
     <div id="outer">
       <div id="logo">
         <picture>
@@ -111,7 +176,7 @@ body {
       <table id="inner" cellpadding="0" cellspacing="0">
         <tr><td class="label">Vision Browser</td>
           <td class="version" id="version">
-            <span>20.02.01 (base v1)</span>
+            <span>20.02.03 (semV1.0.1)</span>
             (<span>Official Build</span>)
             <span></span>
             <span>(Universal (64-bit + 32-bit) builds</span>
@@ -123,14 +188,14 @@ body {
         <tr>
           <td class="label">Revision</td>
           <td class="version">
-            <span>2020_february_rev01</span>
+            <span>2020_february_rev03</span>
           </td>
         </tr>
 
         <tr>
-          <td class="label">OS</td>
+          <td class="label">Release Ring</td>
           <td class="version" id="os_type">
-            <span>Windows</span>
+            <span>Master/Beta</span>
 
 
             <span id="os_version"></span>

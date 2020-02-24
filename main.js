@@ -1,5 +1,5 @@
 // Load Electron modules
-const {app, BrowserWindow, globalShortcut, contents } = require('electron')
+const {app, BrowserWindow, globalShortcut } = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -11,6 +11,7 @@ function createWindow () {
     show: true,
     webPreferences: {
       webviewTag: true,
+      nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -29,9 +30,8 @@ function createWindow () {
     `)
   })
 
+ // mainWindow.webContents.openDevTools();
 }
-// mainWindow.webContents.openDevTools()  
-
 // Window create
 app.on('ready', createWindow)
 

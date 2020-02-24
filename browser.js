@@ -150,6 +150,8 @@ onload = function() {
 };
 
 function navigateTo(url) {
+  const BrowserWindow = require('electron').remote.BrowserWindow;
+  const path = require('path')
   resetExitedState();
   let https = url.slice(0, 8).toLowerCase();
   let about = url.slice(0, 14).toLowerCase();
@@ -159,9 +161,20 @@ function navigateTo(url) {
         } else if (http === 'http://') {
           document.querySelector('webview').src = url;
       } else if (about === 'vision://about') {
-          document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
+      // document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
+      const aboutWindow = new BrowserWindow({
+        width: 1024,
+        height: 1024,
+        frame: false,
+        show: true,
+        webPreferences: {
+          preload: path.join(__dirname, 'preload.js')
+        }
+      })
+
+      aboutWindow.loadFile('version.html')
         } else {
-          document.querySelector('webview').src = 'http://'+ url;
+          document.querySelector('webview').src = 'http://google.com/search?q='+ url;
         }
     }
  // document.querySelector('webview').src = url;
