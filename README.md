@@ -3,6 +3,9 @@ A minimal web browser. Created using Electron.
 
 **In its current state, Vision is very basic and full of bugs & glitches. I *DON'T* suggest using this browser for any serious use.** That being said, if you *do* decide to use it, Vision is currently much more suitable as a single-purpose utility as it does not currently support multiple tabs (and will probably not until a viable solution is found, without being too inefficient). An example of using Vision as a single-purpose utility would be for something like digital signage.
 
+## Project Information
+You can visit Vision's website [here](https://vision.saturdaynightdead.xyz). We're also looking for developers and testers, you can click [on this](https://vision.saturdaynightdead.xyz/future-testers-developers) to find out more!
+
 ## Version numbers
 Each release of Vision uses *two* version identifiers/numbers.
 
@@ -28,4 +31,8 @@ For versions of Vision beyond v20.02.02/semV1.0.0.2, the package.json versions a
 *However*, for versions v20.02.01/semV1.0.0 and v20.02.02, the package.json versions are presented using the *Y-M-R* version number, followed by the *semantic* ___major___ version number. For example, v20.02.02's package.json version is ``v20.02.02 (base v1)``.
 
 ## Why are all base v1.x releases listed as "pre-release"?
-Base v1 is very minimal and unstable. It uses the Electron ``webview`` tag, which is based on Chromium's ``webview``. As the latter is undergoing large architectural changes, many bugs are present in webview. Electron has implemented ``BrowserView``, but as it is hosted in the main process (as opposed to the rendering process), I cannot currently use this method since I can't currently figure out how to use Electron remotes *for the life of me*. Thus, I have deemed base v1.x releases as *unstable and not meant for production use*.
+Base v1 is very minimal and unstable. It uses the Electron ``webview`` tag, which is based on Chromium's ``webview``. As the latter is undergoing large architectural changes, many bugs are present in ``webview``. Thus, I have deemed base v1.x releases as *unstable and not meant for production use*.
+
+### Are there any solutions to this?
+#### (Please note that anytime I mention "API" or "API version", I am referring to the semantic version.)
+Electron has implemented ``BrowserView``, ~~but as it is hosted in the main process (as opposed to the rendering process), I cannot currently use this method since I can't currently figure out how to use Electron remotes *for the life of me*~~ I've recently figured out how to use Electron remotes, meaning that API 2.0 will use BrowserView instead of ``webview``. **By the way, as of right now, I don't plan to include a UI redesign in API 2.0 (with all the changes being under-the-hood), but this may change in the future.**
