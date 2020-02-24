@@ -23,6 +23,12 @@ function createWindow () {
     `)
   })
 
+  globalShortcut.register('Control+R', () => {
+    return mainWindow.webContents.executeJavaScript(`
+    document.getElementsByTagName("webview")[0].reload();
+    `)
+  })
+
 }
 // mainWindow.webContents.openDevTools()  
 
