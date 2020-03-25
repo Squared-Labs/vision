@@ -30,8 +30,18 @@ For versions of Vision beyond v20.02.02/semV1.0.0.2, the package.json versions a
 
 *However*, for versions v20.02.01/semV1.0.0 and v20.02.02, the package.json versions are presented using the *Y-M-R* version number, followed by the *semantic* ___major___ version number. For example, v20.02.02's package.json version is ``v20.02.02 (base v1)``.
 
-## What happened to original v2 plans?
-After additional testing and optimization, I have determined that BrowserView will not be coming to Vision. ``webView`` is already an alright engine, so we will be sticking to that. Additionally, implementing BrowserView would require a rewrite of almost all components of Vision, and that wouldn't be nice for my workflow.
+## Why are all base v1.x releases listed as "pre-release"?
+Base v1 is very minimal and unstable. It uses the Electron ``webview`` tag, which is based on Chromium's ``webview``. As the latter is undergoing large architectural changes, many bugs are present with it. Thus, I have deemed base v1.x releases as *unstable and not meant for production use*.
 
-## What will be included in v2?
-I plan to include DNS-over-HTTPS, bookmarks, and proper downloads. This will take a while to implement, but it should be done sooner.
+## What about APIv2?
+Vision APIv2 is currently under development. I'm working on rebuilding the back-bone of Vision from the ground up, using the much stable BrowserView engine instead of the Chromium-provided ``webview`` engine. A redesign is also planned, but this may change in the future.
+
+### Why use BrowserView instead of ``webview``?
+Electron's implementation of ``webview`` is derived from Chromium's implementation of the tag/engine. Currently, it is undergoing ***massive*** structural changes and is very much unstable.
+
+Electron's team has implemented an alternative to the ``webview`` engine/tag, named BrowserView. It is very much more stable and faster in terms of performance because it uses the core Electron process as opposed to ``webview``, which uses the renderer process. Additionally, it allows the webpage to be in a fixed position that overlays any other element of the page [including window elements], making it drastically easier to frame webpage content.
+
+Previously, Vision has been unable to utilize the BrowserView engine because I was previously unable to use Electron remotes. Now that I am able to use remotes, BrowserView-rendered webpages are now possible. Also, ``webview`` has many program-breaking issues (see [this](https://github.com/electron/electron/issues/8505) and [this](https://github.com/electron/electron/issues/6139)) and BrowserView completely eliminates these issues.  
+
+### I utilize registry values and/or GPOs (or local group policies). Will APIv2 include support for these?
+This is *not* currently planned. This may come at some point *after* v2.
