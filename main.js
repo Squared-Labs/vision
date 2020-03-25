@@ -1,5 +1,5 @@
 // Load Electron modules
-const {app, BrowserWindow, globalShortcut } = require('electron')
+const { app, BrowserWindow, BrowserView, globalShortcut, Menu, screen } = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -29,14 +29,13 @@ function createWindow () {
     document.getElementsByTagName("webview")[0].reload();
     `)
   })
-
  // mainWindow.webContents.openDevTools();
 }
 // Window create
 app.on('ready', createWindow)
 
 app.on('window-all-closed', function () {
-// When all windows are closed, thje app quits unless if platform = Darwin (macOS)
+// When all windows are closed, the app quits unless if platform = Darwin (macOS)
   if (process.platform !== 'darwin') app.quit()
 })
 
