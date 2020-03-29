@@ -1,11 +1,12 @@
 {
   "name": "visionbrowser",
-  "version": "1.2.0",
+  "version": "v20.04.02",
   "description": "Simple and minimalist browser",
   "main": "main.js",
   "scripts": {
     "start": "npx electron .",
-    "dist": "npx electron-builder build"
+    "dist": "npx electron-builder build",
+    "publish": "build --win -p never"
   },
   "repository": "https://github.com/BeanedTaco/vision",
   "keywords": [
@@ -31,23 +32,16 @@
     "appId": "com.visionproject.vision",
     "productName": "Vision Browser",
     "asar": false,
-    "mac": {
-      "icon": "build/icon.icns",
-      "category": "public.app-category.utilities",
-      "target": [
-        "zip",
-        "dmg"
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb",
-        "zip"
-      ]
-    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "BeanedTaco",
+        "repo": "vision"
+      }
+    ],
     "win": {
       "icon": "build/icon.ico",
+      "publish": "github",
       "target": [
         "nsis",
         "zip"
