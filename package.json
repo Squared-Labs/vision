@@ -4,7 +4,8 @@
   "description": "Simple and minimalist browser",
   "main": "main.js",
   "scripts": {
-    "start": "npx electron ."
+    "start": "npx electron .",
+    "dist": "build"
   },
   "repository": "https://github.com/BeanedTaco/vision",
   "keywords": [
@@ -24,25 +25,7 @@
     "electron-packager": "^14.2.1"
   },
   "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin",
-            "linux",
-            "windows"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "setupExe": "vision-browser-installer",
-            "iconURL": "https://raw.githubusercontent.com/BeanedTaco/vision/master/build/star.ico"
-          }
-        }
-      ]
+    "forge": ".\forge.config.js"
     }
   }
 }
