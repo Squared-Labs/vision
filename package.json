@@ -49,13 +49,20 @@
     "win": {
       "icon": "build/icon.ico",
       "target": [
-        "squirrel",
+        "nsis",
         "zip"
       ]
     },
-    "squirrelWindows": {
-      "iconUrl": "https://raw.githubusercontent.com/BeanedTaco/vision/master/build/icon.ico",
-      "loadingGif": "build/install-spinner.gif"
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "license": "build/license.txt",
+      "language": "2057",
+      "shortcutName": "Vision Browser",
+      "menuCategory": "The Vision Project"
     }
   }
 }
