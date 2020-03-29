@@ -2,10 +2,10 @@
   "name": "visionbrowser",
   "version": "1.2.0",
   "description": "Simple and minimalist browser",
-  "main": "src/main.js",
+  "main": "main.js",
   "scripts": {
     "start": "npx electron .",
-    "dist": "npx electron-forge make"
+    "dist": "npx electron-builder build"
   },
   "repository": "https://github.com/BeanedTaco/vision",
   "keywords": [
@@ -13,6 +13,7 @@
     "Made with Electron",
     "Vision Browser"
   ],
+  "author": "The Vision Project",
   "contributors": [
     "SaturdayNightDead <danny@saturdaynightdead.xyz> (https://saturdaynightdead.xyz)",
     "trentanator09 (https://www.reddit.com/user/trentanator09)"
@@ -20,31 +21,40 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^8.0.1",
-    "electron-forge": "^5.2.4",
-    "electron-prebuilt-compile": "4.0.0",
+    "electron-builder-squirrel-windows": "^22.4.1"
+  },
+  "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
   },
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin",
-            "linux",
-            "windows"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "authors": "The Vision Project",
-            "setupExe": "vision-browser-installer",
-            "iconURL": "https://raw.githubusercontent.com/BeanedTaco/vision/master/build/star.ico"
-          }
-        }
+  "build": {
+    "appId": "com.visionproject.vision",
+    "productName": "Vision Browser",
+    "asar": false,
+    "mac": {
+      "icon": "build/icon.icns",
+      "category": "public.app-category.utilities",
+      "target": [
+        "zip",
+        "dmg"
       ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "squirrel",
+        "zip"
+      ]
+    },
+    "squirrelWindows": {
+      "iconUrl": "https://raw.githubusercontent.com/BeanedTaco/vision/master/build/icon.ico",
+      "loadingGif": "build/install-spinner.gif"
     }
   }
 }

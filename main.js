@@ -5,14 +5,14 @@ const path = require('path')
 
 // BEGIN CODE COPIED FROM GITHUB EXAMPLES (modified for Vision's use)
 // Related to installers for Windows
-if (require('electron-squirrel-startup')) return app.quit();
+if (require('electron-squirrel-startup')) {
+    app.quit();
+}
 
 
 if (handleSquirrelEvents()) {
     return;
 }
-
-
 
 function handleSquirrelEvents() {
     if (process.argv.length === 1) {
