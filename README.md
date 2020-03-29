@@ -26,12 +26,15 @@ Example: 1.0.0
 **This version number format is usually only used in places like package.json, as well as places where only semantic versioning is recognized.**
 
 ### How would version numbers be presented in package.json?
-For versions of Vision beyond v20.02.02/semV1.0.0.2, the package.json versions are presented using the semantic version number, instead of the Y-M-R version number. 
+For versions v20.04.02 and beyond, the package.json versions are presented using *exclusively* the Y-M-R version number.
 
-*However*, for versions v20.02.01/semV1.0.0 and v20.02.02, the package.json versions are presented using the *Y-M-R* version number, followed by the *semantic* ___major___ version number. For example, v20.02.02's package.json version is ``v20.02.02 (base v1)``.
+Then, for versions v20.02.02/APIv1.0.0.2 to v20.04.01/APIv1.2.0, the package.json versions are presented using the semantic version number, instead of the Y-M-R version number. 
+
+*However*, for versions v20.02.01/APIv1.0.0 and v20.02.02, the package.json versions are presented using the *Y-M-R* version number, followed by the *semantic* ___major___ version number. For example, v20.02.02's package.json version is ``v20.02.02 (base v1)``.
 
 ## What happened to original v2 plans?
 After additional testing and optimization, I have determined that BrowserView will not be coming to Vision. ``webView`` is already an alright engine, so we will be sticking to that. Additionally, implementing BrowserView would require a rewrite of almost all components of Vision, and that wouldn't be nice for my workflow.
 
 ## What will be included in v2?
-I plan to include DNS-over-HTTPS, bookmarks, and proper downloads. This will take a while to implement, but it should be done sooner.
+~~I plan to include DNS-over-HTTPS, bookmarks, and proper downloads. This will take a while to implement, but it should be done sooner.~~
+DNS over HTTPS hasn't been implemented into the APIv2 branch yet, nor have bookmarks been implemented. The downloads bar and manager will be implemented after APIv2's release.
