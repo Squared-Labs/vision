@@ -1,7 +1,7 @@
 {
   "name": "visionbrowser",
-  "version": "1.1.0",
-  "description": "Vision Browser, a browser built with Electron.",
+  "version": "1.2.0",
+  "description": "Simple and minimalist browser",
   "main": "main.js",
   "scripts": {
     "start": "npx electron ."
@@ -12,12 +12,37 @@
     "Made with Electron",
     "Vision Browser"
   ],
-  "author": "The Vision Project",
+  "contributors": [
+    "SaturdayNightDead <danny@saturdaynightdead.xyz> (https://saturdaynightdead.xyz)",
+    "trentanator09 (https://www.reddit.com/user/trentanator09)"
+  ],
   "license": "MIT",
   "devDependencies": {
     "electron": "^8.0.1"
   },
   "dependencies": {
     "electron-packager": "^14.2.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin",
+            "linux",
+            "windows"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "setupExe": "vision-browser-installer",
+            "iconURL": "https://raw.githubusercontent.com/BeanedTaco/vision/master/build/star.ico"
+          }
+        }
+      ]
+    }
   }
 }
