@@ -2,7 +2,7 @@
   "name": "visionbrowser",
   "version": "1.2.0",
   "description": "Simple and minimalist browser",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "npx electron .",
     "dist": "npx electron-forge make"
@@ -25,6 +25,25 @@
     "electron-squirrel-startup": "^1.0.0"
   },
   "config": {
-    "forge": ".\forge.config.js"
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin",
+            "linux",
+            "windows"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "setupExe": "vision-browser-installer",
+            "iconURL": "https://raw.githubusercontent.com/BeanedTaco/vision/master/build/star.ico"
+          }
+        }
+      ]
     }
   }
+}
