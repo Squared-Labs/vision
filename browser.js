@@ -3,6 +3,12 @@ var isLoading = false;
 
 console.log("Hey there! If you want to open up DevTools, run devTools().")
 
+function closeApp() {
+
+    window.postMessage({
+        handoff: "close",
+    })
+}
 
 function devTools() {
   document.getElementsByTagName("webview")[0].openDevTools();
@@ -18,6 +24,10 @@ onload = function() {
 
   document.querySelector('#forward').onclick = function() {
     webview.goForward();
+  };
+
+  document.querySelector('#bookmark').onclick = function () {
+        alert("Oop! Bookmarks aren't in Vision yet. It's coming soon, though!")
   };
 
   document.querySelector('#home').onclick = function() {
@@ -150,57 +160,27 @@ onload = function() {
 };
 
 function navigateTo(url) {
-    const BrowserWindow = require('electron').remote.BrowserWindow;
-    const globalShortcut = require('electron').remote.globalShortcut;
-  const path = require('path')
   resetExitedState();
   let https = url.slice(0, 8).toLowerCase();
   let about = url.slice(0, 14).toLowerCase();
   let piav = url.slice(0, 13).toLowerCase();
         let http = url.slice(0, 7).toLowerCase();
-        if (https === 'https://') {
-          document.querySelector('webview').src = url;
-        } else if (http === 'http://') {
-          document.querySelector('webview').src = url;
-      } else if (about === 'vision://about') {
-      // document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
-      const aboutWindow = new BrowserWindow({
-        width: 1024,
-        height: 1024,
-        frame: false,
-        show: true,
-        webPreferences: {
-          preload: path.join(__dirname, 'preload.js')
-        }
-      })
+    if (https === 'https://') {
+        document.querySelector('webview').src = url;
+    } else if (http === 'http://') {
+        document.querySelector('webview').src = url;
+    } else if (about === 'vision://about') {
+        // document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
+        window.postMessage({
+            handoff: "about",
+        })
 
-       aboutWindow.loadFile('version.html')
-
-      } else if (piav === 'vision://piav') {
-          // document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
-          const PIAVWindow = new BrowserWindow({
-              width: 1024,
-              height: 1024,
-              frame: false,
-              show: true,
-              webPreferences: {
-                 preload: path.join(__dirname, 'preload.js')
-               }
-      })
-
-            PIAVWindow.loadFile('piav.html')
-
-            globalShortcut.register('Control+Shift+I', () => {
-                return mainWindow.webContents.executeJavaScript(`
-    document.getElementsByTagName("webview")[0].openDevTools();
-    `)
-            })
-
-            globalShortcut.register('Control+R', () => {
-                return mainWindow.webContents.executeJavaScript(`
-    document.getElementsByTagName("webview")[0].reload();
-    `)
-            })
+    } else if (piav === 'vision://piav') {
+        // document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
+        window.postMessage({
+            handoff: "piav",
+        })
+ 
  // mainWindow.webContents.openDevTools();
         } else {
           document.querySelector('webview').src = 'http://google.com/search?q='+ url;

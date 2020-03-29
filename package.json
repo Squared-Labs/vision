@@ -24,7 +24,8 @@
     "electron-builder-squirrel-windows": "^22.4.1"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-tabs": "^0.15.0"
   },
   "build": {
     "appId": "com.visionproject.vision",
