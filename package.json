@@ -21,7 +21,7 @@
   "devDependencies": {
     "electron": "^8.0.1",
     "electron-forge": "^5.2.4",
-    "electron-prebuilt-compile": "^4.0.0",
+    "electron-prebuilt-compile": "4.0.0",
     "electron-squirrel-startup": "^1.0.0"
   },
   "config": {
