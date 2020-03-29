@@ -39,6 +39,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
+            "authors": "The Vision Project",
             "setupExe": "vision-browser-installer",
             "iconURL": "https://raw.githubusercontent.com/BeanedTaco/vision/master/build/star.ico"
           }
