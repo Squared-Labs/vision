@@ -1,6 +1,6 @@
 {
   "name": "visionbrowser",
-  "version": "v20.04.02",
+  "version": "20.4.3",
   "description": "Simple and minimalist browser",
   "main": "main.js",
   "scripts": {
@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "electron-tabs": "^0.15.0"
+    "electron-tabs": "^0.15.0",
+    "electron-updater": "^4.2.5"
   },
   "build": {
     "appId": "com.visionproject.vision",

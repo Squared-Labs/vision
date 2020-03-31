@@ -1,7 +1,11 @@
 // Load Electron modules
 const { app, BrowserWindow, BrowserView, globalShortcut, Menu, screen, ipcMain } = require('electron')
+const {autoUpdater} = require("electron-updater");
 const path = require('path')
 
+app.on('ready', function () {
+    autoUpdater.checkForUpdatesAndNotify();
+});
 
 app.on('ready', () => {
     ipcMain.on('versionFire', (e, message) => {
@@ -72,7 +76,10 @@ function createWindow () {
     document.getElementsByTagName("webview")[0].reload();
     `)
   })
- // mainWindow.webContents.openDevTools();
+
+  globalShortcut.register('Control+W', () => {
+      return app.quit();
+  })
 }
 // Window create
 app.on('ready', createWindow)

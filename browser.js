@@ -160,35 +160,45 @@ onload = function() {
 };
 
 function navigateTo(url) {
-  resetExitedState();
+    resetExitedState();
+  let visionProtocol = url.slice(0, url.length).toLowerCase();
   let https = url.slice(0, 8).toLowerCase();
-  let about = url.slice(0, 14).toLowerCase();
-  let piav = url.slice(0, 13).toLowerCase();
-        let http = url.slice(0, 7).toLowerCase();
+  let http = url.slice(0, 7).toLowerCase();
+
+
     if (https === 'https://') {
         document.querySelector('webview').src = url;
     } else if (http === 'http://') {
         document.querySelector('webview').src = url;
-    } else if (about === 'vision://about') {
-        // document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
+        // mainWindow.webContents.openDevTools();
+    } else if (visionProtocol === 'vision://about') {
+        visionProtocolHandoff(url)
+
+    } else if (piav === 'vision://piav') {
+        visionProtocolHandoff(url)
+        } else {
+          document.querySelector('webview').src = 'http://google.com/search?q='+ url;
+    }
+}
+
+
+function visionProtocolHandoff(url) {
+    let entry = url.slice(0, url.length).toLowerCase();
+    if (entry === 'vision://about') {
         window.postMessage({
             handoff: "about",
         })
 
-    } else if (piav === 'vision://piav') {
-        // document.querySelector('webview').src = "https://visionbrowser-about.glitch.me/2020feb_rev2.html"
+
+
+    } else if (entry === 'vision://piav') {
         window.postMessage({
             handoff: "piav",
         })
- 
- // mainWindow.webContents.openDevTools();
-        } else {
-          document.querySelector('webview').src = 'http://google.com/search?q='+ url;
-        }
     }
+}
  // document.querySelector('webview').src = url;
 //}
-
 
 
 function doLayout() {
