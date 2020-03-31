@@ -22,9 +22,11 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^8.0.1",
-    "electron-builder-squirrel-windows": "^22.4.1"
+    "electron-builder-squirrel-windows": "^22.4.1",
+    "electron-rebuild": "^1.10.1"
   },
   "dependencies": {
+    "discord.js": "^12.1.1",
     "electron-squirrel-startup": "^1.0.0",
     "electron-tabs": "^0.15.0",
     "electron-updater": "^4.2.5"
