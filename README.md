@@ -6,6 +6,14 @@ A minimal web browser. Created using Electron.
 ## Project Information
 You can visit Vision's website [here](https://vision.saturdaynightdead.xyz). We're also looking for developers and testers, you can click [on this](https://vision.saturdaynightdead.xyz/future-testers-developers) to find out more!
 
+## Where are the docs?
+There isn't really documentation for how to use the browser, because it should really be straight forward. Although, we do have some custom links for Vision (as well as a protocol API for versions 20.04.03 and higher).
+
+vision://about opens a window that shows information about the release and stuff. Kinda like Chrome's--Actually, we did copy the page source from Chromium's, but we modified it (of course).
+
+
+Anyway, that being said, you may visit the docs folder [here](docs). For developers who want to modify Vision, there will be documentation covering those things *eventually*. For now, the focus is to document the vision://protocol API. 
+
 ## Version numbers
 Each release of Vision uses *two* version identifiers/numbers.
 
