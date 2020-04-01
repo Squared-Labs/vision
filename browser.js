@@ -2,8 +2,11 @@
  * Filename: browser.js
  * Author: SaturdayNightDead (BeanedTaco)
  * Created: 21 February 2020
+ * Description: This is the backend of the Browser UI.
  * Originally from hokein/electron-sample-apps/webview/browser
 */
+
+const visionApi = window.api
 
 window.onresize = doLayout;
 var isLoading = false;
@@ -12,7 +15,7 @@ console.log("Hey there! If you want to open up DevTools, run devTools().")
 
 function closeApp() {
 
-    window.api.handoff("close", "visionIntegratedStamp")
+    visionApi.ipc.handoff("close", "visionIntegratedStamp")
 }
 
 function devTools() {
@@ -181,6 +184,8 @@ function navigateTo(url) {
 
     } else if (visionProtocol === 'vision://piav') {
         visionProtocolHandoff(url)
+    } else if (visionProtocol.contains("vision;//")) {
+        return;
     } else {
         document.querySelector('webview').src = 'http://google.com/search?q=' + url;
     }
@@ -190,11 +195,11 @@ function navigateTo(url) {
 function visionProtocolHandoff(url) {
     let entry = url.slice(0, url.length).toLowerCase();
     if (entry === 'vision://about') {
-        window.api.handoff("about", "visionStamp")
+        visionApi.ipc.handoff("about", "visionStamp")
 
 
     } else if (entry === 'vision://piav') {
-        window.api.handoff("piav", "visionStamp")
+        visionApi.ipc.handoff("piav", "visionStamp")
     }
 }
  // document.querySelector('webview').src = url;

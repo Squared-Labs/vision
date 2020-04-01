@@ -12,7 +12,7 @@ There isn't really documentation for how to use the browser, because it should r
 vision://about opens a window that shows information about the release and stuff. Kinda like Chrome's--Actually, we did copy the page source from Chromium's, but we modified it (of course).
 
 
-Anyway, that being said, you may visit the docs folder [here](docs). For developers who want to modify Vision, you can visit [this repo](https://github.com/BeanedTaco/vision-tools) to access tools so you can rebuild the browser. API docs will be in the docs folder, as well.
+Anyway, that being said, if you're a developer (or even just some consumer) who wants to modify Vision. you can visit [this repo](https://github.com/BeanedTaco/vision-tools) to access tools so you can rebuild the browser. You can find documentation for Vision's API [here](https://vision.saturdaynightdead.xyz/docs).
 
 ## Version numbers
 Each release of Vision uses *two* version identifiers/numbers.

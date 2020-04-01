@@ -9,6 +9,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld(
     "api", {
+        ipc: {
     handoff: (channel, data) => {
             let validHandoffs = ["about", "close", "piav"];
             if (validHandoffs.includes(channel)) {
@@ -17,8 +18,9 @@ contextBridge.exposeInMainWorld(
     },
     handback: (channel, func) => {
             let validHandbacks = [""];
-            if (validHandbacks.includes(channel)) {
-                ipcRenderer.on(channel, (event, ...args) => func(...args));
+        if (validHandbacks.includes(channel)) {
+            ipcRenderer.on(channel, (event, ...args) => func(...args));
+            }
         }   
     }
 }

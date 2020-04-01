@@ -2,12 +2,13 @@
  * Filename: main.js
  * Author: SaturdayNightDead (BeanedTaco)
  * Created: 21 February 2020
+ * Description: The main process of Vision. This file handles updates, windows, and basically all other functions the Browser uses.
  * Originally from electron/electron-quick-start
 */
 
-
 // Load Electron modules
 const { app, BrowserWindow, BrowserView, globalShortcut, Menu, screen, ipcMain } = require('electron')
+
 const {autoUpdater} = require("electron-updater");
 const path = require('path')
 
@@ -93,10 +94,16 @@ function createWindow () {
   globalShortcut.register('Control+W', () => {
       return app.quit();
   })
-  mainWindow.webContents.openDevTools()
+ // mainWindow.webContents.openDevTools()
+
+ const visionApi = mainWindow.webContents.api
+// Handback reference example:
+// visionApi.ipc.handback("example", responseObj);
 }
 // Window create
 app.on('ready', createWindow)
+
+
 
 app.on('window-all-closed', function () {
 // When all windows are closed, the app quits unless if platform = Darwin (macOS)
@@ -110,4 +117,6 @@ app.on('activate', function () {
 
 // NOTE TO SELF: include more code if needed
 
-let win;
+
+
+
