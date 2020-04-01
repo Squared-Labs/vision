@@ -1,14 +1,26 @@
+/*
+ * Filename: main.js
+ * Author: SaturdayNightDead (BeanedTaco)
+ * Created: 21 February 2020
+ * Originally from electron/electron-quick-start
+*/
+
+
 // Load Electron modules
 const { app, BrowserWindow, BrowserView, globalShortcut, Menu, screen, ipcMain } = require('electron')
 const {autoUpdater} = require("electron-updater");
 const path = require('path')
+
+
+
+
 
 app.on('ready', function () {
     autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on('ready', () => {
-    ipcMain.on('versionFire', (e, message) => {
+    ipcMain.on('version', (e, message) => {
         console.log('Opening vision://about window..', e, message);
 
         const aboutWindow = new BrowserWindow({
@@ -24,7 +36,7 @@ app.on('ready', () => {
         aboutWindow.loadFile('version.html')
     });
 
-    ipcMain.on('piavFire', (e, message) => {
+    ipcMain.on('piav', (e, message) => {
         console.log('Opening vision://piav window..', e, message);
 
         const PIAVWindow = new BrowserWindow({
@@ -40,7 +52,7 @@ app.on('ready', () => {
         PIAVWindow.loadFile('piav.html')
     });
 
-    ipcMain.on('closeFire', (e, message) => {
+    ipcMain.on('close', (e, message) => {
         console.log('Closing Vision..', e, message);
         app.quit();
     });
@@ -95,3 +107,5 @@ app.on('activate', function () {
 })
 
 // NOTE TO SELF: include more code if needed
+
+let win;

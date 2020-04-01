@@ -1,3 +1,10 @@
+/*
+ * Filename: browser.js
+ * Author: SaturdayNightDead (BeanedTaco)
+ * Created: 21 February 2020
+ * Originally from hokein/electron-sample-apps/webview/browser
+*/
+
 window.onresize = doLayout;
 var isLoading = false;
 
