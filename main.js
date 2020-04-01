@@ -20,7 +20,7 @@ app.on('ready', function () {
 });
 
 app.on('ready', () => {
-    ipcMain.on('version', (e, message) => {
+    ipcMain.on('about', (e, message) => {
         console.log('Opening vision://about window..', e, message);
 
         const aboutWindow = new BrowserWindow({
@@ -71,6 +71,7 @@ function createWindow () {
       webviewTag: true,
       nodeIntegration: false,
       enableRemoteModule: false,
+      contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -92,6 +93,7 @@ function createWindow () {
   globalShortcut.register('Control+W', () => {
       return app.quit();
   })
+  mainWindow.webContents.openDevTools()
 }
 // Window create
 app.on('ready', createWindow)

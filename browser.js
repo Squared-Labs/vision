@@ -12,9 +12,7 @@ console.log("Hey there! If you want to open up DevTools, run devTools().")
 
 function closeApp() {
 
-    window.postMessage({
-        handoff: "close",
-    })
+    window.api.handoff("close", "visionIntegratedStamp")
 }
 
 function devTools() {
@@ -168,9 +166,9 @@ onload = function() {
 
 function navigateTo(url) {
     resetExitedState();
-  let visionProtocol = url.slice(0, url.length).toLowerCase();
-  let https = url.slice(0, 8).toLowerCase();
-  let http = url.slice(0, 7).toLowerCase();
+    let visionProtocol = url.slice(0, url.length).toLowerCase();
+    let https = url.slice(0, 8).toLowerCase();
+    let http = url.slice(0, 7).toLowerCase();
 
 
     if (https === 'https://') {
@@ -181,10 +179,10 @@ function navigateTo(url) {
     } else if (visionProtocol === 'vision://about') {
         visionProtocolHandoff(url)
 
-    } else if (piav === 'vision://piav') {
+    } else if (visionProtocol === 'vision://piav') {
         visionProtocolHandoff(url)
-        } else {
-          document.querySelector('webview').src = 'http://google.com/search?q='+ url;
+    } else {
+        document.querySelector('webview').src = 'http://google.com/search?q=' + url;
     }
 }
 
@@ -192,16 +190,11 @@ function navigateTo(url) {
 function visionProtocolHandoff(url) {
     let entry = url.slice(0, url.length).toLowerCase();
     if (entry === 'vision://about') {
-        window.postMessage({
-            handoff: "about",
-        })
-
+        window.api.handoff("about", "visionStamp")
 
 
     } else if (entry === 'vision://piav') {
-        window.postMessage({
-            handoff: "piav",
-        })
+        window.api.handoff("piav", "visionStamp")
     }
 }
  // document.querySelector('webview').src = url;
