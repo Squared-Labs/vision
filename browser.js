@@ -27,15 +27,15 @@ onload = function() {
   doLayout();
 
   document.querySelector('#back').onclick = function() {
-    webview.goBack();
+    visionApi.webFunctions.back();
   };
 
   document.querySelector('#forward').onclick = function() {
-    webview.goForward();
+    visionApi.webFunctions.forward();
   };
 
   document.querySelector('#bookmark').onclick = function () {
-        alert("Oop! Bookmarks aren't in Vision yet. It's coming soon, though!")
+    visionApi.webFunctions.alert("Oop! Bookmarks aren't in Vision yet. It's coming soon, though!");
   };
 
   document.querySelector('#home').onclick = function() {
@@ -43,11 +43,7 @@ onload = function() {
   };
 
   document.querySelector('#reload').onclick = function() {
-    if (isLoading) {
-      webview.stop();
-    } else {
-      webview.reload();
-    }
+    visionApi.webFunctions.reload();
   };
   document.querySelector('#reload').addEventListener(
     'webkitAnimationIteration',
@@ -184,8 +180,6 @@ function navigateTo(url) {
 
     } else if (visionProtocol === 'vision://piav') {
         visionProtocolHandoff(url)
-    } else if (visionProtocol.contains("vision;//")) {
-        return;
     } else {
         document.querySelector('webview').src = 'http://google.com/search?q=' + url;
     }

@@ -9,20 +9,48 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld(
     "api", {
-        ipc: {
-    handoff: (channel, data) => {
-            let validHandoffs = ["about", "close", "piav"];
+    ipc: {
+         handoff: (channel, data) => {
+            let validHandoffs = ["about", "close", "piav", "contextMenu"];
             if (validHandoffs.includes(channel)) {
                     ipcRenderer.send(channel, data);
             }
+         },
+         handback: (channel, func) => {
+            let validHandbacks = ["go"];
+            if (validHandbacks.includes(channel)) {
+                    ipcRenderer.on(channel, (event, ...args) => func(...args));
+                }
+         }   
     },
-    handback: (channel, func) => {
-            let validHandbacks = [""];
-        if (validHandbacks.includes(channel)) {
-            ipcRenderer.on(channel, (event, ...args) => func(...args));
-            }
-        }   
+    webFunctions: {
+        alert: (msg) => {
+            alert(msg)
+        },
+        devTools: () => {
+           ipcRenderer.send('devTools');
+        },
+        reload: () => {
+           ipcRenderer.send('reload');
+        },
+        forward: () => {
+           ipcRenderer.send('forward');
+        },
+        back: () => {
+           ipcRenderer.send('back');
+        },
+      /*  go: (url) => {
+           ipcRenderer.send('go', url);
+        }, */
+    },
+ /*   newClass: {
+           
+    },
+
+    newerClass: {
+
     }
+    */
 }
 );
 

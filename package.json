@@ -27,11 +27,12 @@
   },
   "dependencies": {
     "discord.js": "^12.1.1",
+    "electron-builder": "^22.4.1",
+    "electron-packager": "^14.2.1",
     "electron-squirrel-startup": "^1.0.0",
     "electron-tabs": "^0.15.0",
     "electron-updater": "^4.2.5",
-    "electron-packager": "^14.2.1",
-    "electron-builder": "^22.4.1"
+    "v8-compile-cache": "^2.1.0"
   },
   "build": {
     "appId": "com.visionproject.vision",

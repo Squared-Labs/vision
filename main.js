@@ -7,20 +7,94 @@
 */
 
 // Load Electron modules
-const { app, BrowserWindow, BrowserView, globalShortcut, Menu, screen, ipcMain } = require('electron')
+const { app, BrowserWindow, BrowserView, globalShortcut, Menu, screen, MenuItem, ipcMain } = require('electron')
 
 const {autoUpdater} = require("electron-updater");
 const path = require('path')
-
+require('v8-compile-cache');
 
 
 
 
 app.on('ready', function () {
     autoUpdater.checkForUpdatesAndNotify();
+    
 });
 
+
+
 app.on('ready', () => {
+    const mainWindow = new BrowserWindow({
+        width: 1024,
+        height: 1024,
+        frame: false,
+        show: true,
+        webPreferences: {
+            webviewTag: true,
+            nodeIntegration: false,
+            enableRemoteModule: false,
+            contextIsolation: true,
+            preload: path.join(__dirname, 'preload.js')
+        }
+    })
+
+    // Load browser
+    mainWindow.loadFile('browser.html')
+    globalShortcut.register('Control+Shift+I', () => {
+        return mainWindow.webContents.executeJavaScript(`
+    document.getElementsByTagName("webview")[0].openDevTools();
+    `)
+    })
+
+    globalShortcut.register('Control+R', () => {
+        return
+        //return mainWindow.webContents.executeJavaScript(`
+        //document.getElementsByTagName("webview")[0].reload();
+        //`)
+    })
+
+    globalShortcut.register('Control+W', () => {
+        return app.quit();
+    })
+
+    globalShortcut.register('Alt+Shift+I', () => {
+        return mainWindow.webContents.openDevTools();
+    })
+
+    const visionApi = mainWindow.webContents.api
+// Handback reference example:
+// visionApi.ipc.handback("example", responseObj);
+
+
+    // almost...
+
+    // OOP LETS CREATE A MENU
+    ipcMain.on('contextMenu', (e, message, data) => {
+        let rightClickPosition = null
+
+        const menu = new Menu()
+        const menuItem = new MenuItem({
+            label: 'Inspect Element',
+            click: () => {
+                mainWindow.webContents.executeJavaScript(`
+    document.getElementsByTagName("webview")[0].openDevTools();
+    `)
+            }
+        })
+        menu.append(menuItem)
+        rightClickPosition = { x: e.x, y: e.y }
+        menu.popup(mainWindow)
+    });
+
+    // OK DONE
+
+
+    // almost...
+
+
+    // Window Creation End
+
+    // Functions
     ipcMain.on('about', (e, message) => {
         console.log('Opening vision://about window..', e, message);
 
@@ -35,6 +109,36 @@ app.on('ready', () => {
         })
 
         aboutWindow.loadFile('version.html')
+    });
+
+    ipcMain.on('devTools', (e, message) => {
+        mainWindow.webContents.openDevTools()
+    });
+
+    ipcMain.on('reload', (e, message) => {
+        mainWindow.webContents.executeJavaScript(`
+            var isLoading = false;
+            if (isLoading) {
+                    document.getElementsByTagName('webview')[0].stop();
+            } else {
+                    document.getElementsByTagName('webview')[0].reload();
+            }
+        `)
+    });
+
+
+  /*  ipcMain.on('go', async (URL) => {
+        mainWindow.webContents.executeJavaScript(`document.getElementsByTagName('webview')[0].src = ${URL}`)
+    }); */
+
+    ipcMain.on('forward', (e, message) => {
+        mainWindow.webContents.executeJavaScript(`
+            document.getElementsByTagName('webview')[0].goForward();
+        `)
+    });
+
+    ipcMain.on('back', (e, message) => {
+        mainWindow.webContents.executeJavaScript(`document.getElementsByTagName('webview')[0].goBack()`)
     });
 
     ipcMain.on('piav', (e, message) => {
@@ -58,52 +162,6 @@ app.on('ready', () => {
         app.quit();
     });
 });
-
-
-
-function createWindow () {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 1024,
-    frame: false,
-    show: true,
-    webPreferences: {
-      webviewTag: true,
-      nodeIntegration: false,
-      enableRemoteModule: false,
-      contextIsolation: true,
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
-
-  // Load browser
-  mainWindow.loadFile('browser.html')
-  globalShortcut.register('Control+Shift+I', () => {
-    return mainWindow.webContents.executeJavaScript(`
-    document.getElementsByTagName("webview")[0].openDevTools();
-    `)
-  })
-
-  globalShortcut.register('Control+R', () => {
-    return mainWindow.webContents.executeJavaScript(`
-    document.getElementsByTagName("webview")[0].reload();
-    `)
-  })
-
-  globalShortcut.register('Control+W', () => {
-      return app.quit();
-  })
- // mainWindow.webContents.openDevTools()
-
- const visionApi = mainWindow.webContents.api
-// Handback reference example:
-// visionApi.ipc.handback("example", responseObj);
-}
-// Window create
-app.on('ready', createWindow)
-
-
 
 app.on('window-all-closed', function () {
 // When all windows are closed, the app quits unless if platform = Darwin (macOS)
