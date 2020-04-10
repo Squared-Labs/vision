@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld(
     "api", {
     ipc: {
          handoff: (channel, data) => {
-            let validHandoffs = ["about", "close", "piav", "contextMenu"];
+            let validHandoffs = ["about", "close", "piav", "contextMenu", "bookmarksPopup"];
             if (validHandoffs.includes(channel)) {
                     ipcRenderer.send(channel, data);
             }
@@ -39,15 +39,21 @@ contextBridge.exposeInMainWorld(
         back: () => {
            ipcRenderer.send('back');
         },
-      /*  go: (url) => {
-           ipcRenderer.send('go', url);
-        }, */
-    },
- /*   newClass: {
-           
+        favicon: () => {
+           require('favicon-getter').default;
+        }
+            //  go: (msg) => {
+            //   document.querySelector('webview').src = `${msg}`
+            // THIS METHOD IS DEPRECATED. USE navigateTo() INSTEAD.
+            //   ipcRenderer.send('go', url);
+            //  }, 
     },
 
-    newerClass: {
+    newClass: {
+               
+    },
+
+   /* newerClass: {
 
     }
     */

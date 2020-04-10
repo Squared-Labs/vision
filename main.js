@@ -115,6 +115,20 @@ app.on('ready', () => {
         mainWindow.webContents.openDevTools()
     });
 
+    ipcMain.on('bookmarksPopup', (e, message) => {
+        const bookmarksWindow = new BrowserWindow({
+            width: 1024,
+            height: 512,
+            frame: false,
+            show: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+        })
+
+        bookmarksWindow.loadFile('bookmarks.html')
+    });
+
     ipcMain.on('reload', (e, message) => {
         mainWindow.webContents.executeJavaScript(`
             var isLoading = false;
@@ -127,7 +141,8 @@ app.on('ready', () => {
     });
 
 
-  /*  ipcMain.on('go', async (URL) => {
+  /* THIS OLD METHOD IS DEPRECATED
+   * ipcMain.on('go', async (URL) => {
         mainWindow.webContents.executeJavaScript(`document.getElementsByTagName('webview')[0].src = ${URL}`)
     }); */
 
