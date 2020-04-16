@@ -11,10 +11,6 @@ There isn't really documentation for how to use the browser, because it should r
 
 vision://about opens a window that shows information about the release and stuff. Kinda like Chrome's--Actually, we did copy the page source from Chromium's, but we modified it (of course).
 
-vision://website opens our website, self-explanatory. :)
-
-vision://discord gives you the invite to our Discord! If you have the Discord desktop app (and it is open), it will ask you if you want to join there.
-
 Anyway, that being said, if you're a developer (or even just some consumer) who wants to modify Vision. you can visit [this repo](https://github.com/BeanedTaco/vision-tools) to access tools so you can rebuild the browser. You can find documentation for Vision's API [here](https://vision.saturdaynightdead.xyz/docs).
 
 ## Version numbers
@@ -44,8 +40,4 @@ Then, for versions v20.02.02/APIv1.0.0.2 to v20.04.01/APIv1.2.0, the package.jso
 *However*, for versions v20.02.01/APIv1.0.0 and v20.02.02, the package.json versions are presented using the *Y-M-R* version number, followed by the *semantic* ___major___ version number. For example, v20.02.02's package.json version is ``v20.02.02 (base v1)``.
 
 ## What happened to original v2 plans?
-After additional testing and optimization, I have determined that BrowserView will not be coming to Vision. ``webView`` is already an alright engine, so we will be sticking to that. Additionally, implementing BrowserView would require a rewrite of almost all components of Vision, and that wouldn't be nice for my workflow.
-
-## What will be included in v2?
-~~I plan to include DNS-over-HTTPS, bookmarks, and proper downloads. This will take a while to implement, but it should be done sooner.~~
-DNS over HTTPS hasn't been implemented into the APIv2 branch yet, nor have bookmarks been implemented. The downloads bar and manager will be implemented after APIv2's release.
+Vision is now in the EOIL stage of life, meaning that there will no longer be any new improvements for Vision, and the EOL date will be sometime in June or July.
