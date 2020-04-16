@@ -1,6 +1,6 @@
 {
   "name": "visionbrowser",
-  "version": "20.4.4",
+  "version": "20.4.5",
   "description": "Simple and minimalist browser",
   "main": "main.js",
   "scripts": {

@@ -69,22 +69,6 @@ app.on('ready', () => {
     // almost...
 
     // OOP LETS CREATE A MENU
-    ipcMain.on('contextMenu', (e, message, data) => {
-        let rightClickPosition = null
-
-        const menu = new Menu()
-        const menuItem = new MenuItem({
-            label: 'Inspect Element',
-            click: () => {
-                mainWindow.webContents.executeJavaScript(`
-    document.getElementsByTagName("webview")[0].openDevTools();
-    `)
-            }
-        })
-        menu.append(menuItem)
-        rightClickPosition = { x: e.x, y: e.y }
-        menu.popup(mainWindow)
-    });
 
     // OK DONE
 
@@ -115,20 +99,6 @@ app.on('ready', () => {
         mainWindow.webContents.openDevTools()
     });
 
-    ipcMain.on('bookmarksPopup', (e, message) => {
-        const bookmarksWindow = new BrowserWindow({
-            width: 1024,
-            height: 512,
-            frame: false,
-            show: true,
-            webPreferences: {
-                preload: path.join(__dirname, 'preload.js')
-            }
-        })
-
-        bookmarksWindow.loadFile('bookmarks.html')
-    });
-
     ipcMain.on('reload', (e, message) => {
         mainWindow.webContents.executeJavaScript(`
             var isLoading = false;
@@ -154,22 +124,6 @@ app.on('ready', () => {
 
     ipcMain.on('back', (e, message) => {
         mainWindow.webContents.executeJavaScript(`document.getElementsByTagName('webview')[0].goBack()`)
-    });
-
-    ipcMain.on('piav', (e, message) => {
-        console.log('Opening vision://piav window..', e, message);
-
-        const PIAVWindow = new BrowserWindow({
-            width: 512,
-            height: 512,
-            frame: false,
-            show: true,
-            webPreferences: {
-                preload: path.join(__dirname, 'preload.js')
-            }
-        })
-
-        PIAVWindow.loadFile('piav.html')
     });
 
     ipcMain.on('close', (e, message) => {

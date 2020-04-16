@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld(
     "api", {
     ipc: {
          handoff: (channel, data) => {
-            let validHandoffs = ["about", "close", "piav", "contextMenu", "bookmarksPopup"];
+            let validHandoffs = ["about", "close"];
             if (validHandoffs.includes(channel)) {
                     ipcRenderer.send(channel, data);
             }

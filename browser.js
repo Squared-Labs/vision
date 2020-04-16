@@ -34,14 +34,6 @@ onload = function() {
     visionApi.webFunctions.forward();
   };
 
-  document.querySelector('#bookmark').onclick = function () {
-    visionApi.webFunctions.alert("Oop! Bookmarks aren't in Vision yet. When it is here though, this will be the button for adding a bookmark, and the book button will open a window, allowing you to open bookmarks and stuff.");
-    };
-
-    document.querySelector('#bookmarks').onclick = function () {
-    visionApi.ipc.handoff("bookmarksPopup", "visionStamp")
-    };
-
   document.querySelector('#home').onclick = function() {
     navigateTo('https://web.tabliss.io/');
   };
@@ -181,12 +173,6 @@ function navigateTo(url) {
         // mainWindow.webContents.openDevTools();
     } else if (visionProtocol === 'vision://about') {
         visionProtocolHandoff(url)
-    } else if (visionProtocol === 'vision://piav') {
-        visionProtocolHandoff(url)
-    } else if (visionProtocol === 'vision://discord') {
-        visionProtocolHandoff(url)
-    } else if (visionProtocol === 'vision://website') {
-        visionProtocolHandoff(url)
     } else {
         document.querySelector('webview').src = 'http://google.com/search?q=' + url;
     }
@@ -197,15 +183,6 @@ function visionProtocolHandoff(url) {
     let entry = url.slice(0, url.length).toLowerCase();
     if (entry === 'vision://about') {
         visionApi.ipc.handoff("about", "visionStamp")
-
-
-    } else if (entry === 'vision://piav') {
-        visionApi.ipc.handoff("piav", "visionStamp")
-    } else if (entry === 'vision://discord') {
-        document.querySelector('webview').src = 'https://discord.gg/ZCZuHjk'
-    } else if (entry === 'vision://website') {
-        document.querySelector('webview').src = 'https://vision.saturdaynightdead.xyz'
-    }
 }
  // document.querySelector('webview').src = url;
 //}
