@@ -183,6 +183,7 @@ function visionProtocolHandoff(url) {
     let entry = url.slice(0, url.length).toLowerCase();
     if (entry === 'vision://about') {
         visionApi.ipc.handoff("about", "visionStamp")
+    }
 }
  // document.querySelector('webview').src = url;
 //}
