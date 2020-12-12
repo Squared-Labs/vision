@@ -23,17 +23,10 @@ function devTools() {
   document.getElementsByTagName("webview")[0].openDevTools();
 }
 
-onload = function() {
+onload = async function() {
   var webview = document.querySelector('webview');
   webview.setAttribute("src", startingAddress)
   doLayout();
-  visionApi.information.getMetadata().then(md => {
-    document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main}</a>`
-    if (md.flags.testing == true) {
-      alert("!WARNING! This is a testing build. Please use with caution.")
-      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} || Development Ring</a>`
-    }
-  });
   document.querySelector('#back').onclick = function() {
     visionApi.webFunctions.back();
   };
@@ -56,7 +49,7 @@ onload = function() {
         document.body.classList.remove('loading');
       }
     });
-
+    
   document.querySelector('#location-form').onsubmit = function(e) {
     e.preventDefault();
     navigateTo(document.querySelector('#location').value);
@@ -69,102 +62,14 @@ onload = function() {
   webview.addEventListener('did-get-redirect-request', handleLoadRedirect);
   webview.addEventListener('did-finish-load', handleLoadCommit);
 
-  // Test for the presence of the experimental <webview> zoom and find APIs.
-  if (typeof(webview.setZoom) == "function" &&
-      typeof(webview.find) == "function") {
-    var findMatchCase = false;
-
-    document.querySelector('#zoom').onclick = function() {
-      if(document.querySelector('#zoom-box').style.display == '-webkit-flex') {
-        closeZoomBox();
-      } else {
-        openZoomBox();
-      }
-    };
-
-    document.querySelector('#zoom-form').onsubmit = function(e) {
-      e.preventDefault();
-      var zoomText = document.forms['zoom-form']['zoom-text'];
-      var zoomFactor = Number(zoomText.value);
-      if (zoomFactor > 5) {
-        zoomText.value = "5";
-        zoomFactor = 5;
-      } else if (zoomFactor < 0.25) {
-        zoomText.value = "0.25";
-        zoomFactor = 0.25;
-      }
-      webview.setZoom(zoomFactor);
+  visionApi.information.getMetadata().then(md => {
+    document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main}</a>`
+    if (md.flags.branch == "testing") {
+      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} || Beta Ring, use with caution</a>`
+    } if (md.flags.branch == "v2") {
+      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} || VERSION 2 BUILD, USE WITH EXTREME CAUTION</a>`
     }
-
-    document.querySelector('#zoom-in').onclick = function(e) {
-      e.preventDefault();
-      increaseZoom();
-    }
-
-    document.querySelector('#zoom-out').onclick = function(e) {
-      e.preventDefault();
-      decreaseZoom();
-    }
-
-    document.querySelector('#find').onclick = function() {
-      if(document.querySelector('#find-box').style.display == 'block') {
-        document.querySelector('webview').stopFinding();
-        closeFindBox();
-      } else {
-        openFindBox();
-      }
-    };
-
-    document.querySelector('#find-text').oninput = function(e) {
-      webview.find(document.forms['find-form']['find-text'].value,
-                   {matchCase: findMatchCase});
-    }
-
-    document.querySelector('#find-text').onkeydown = function(e) {
-      if (event.ctrlKey && event.keyCode == 13) {
-        e.preventDefault();
-        webview.stopFinding('activate');
-        closeFindBox();
-      }
-    }
-    
-    document.querySelector('#match-case').onclick = function(e) {
-      e.preventDefault();
-      findMatchCase = !findMatchCase;
-      var matchCase = document.querySelector('#match-case');
-      if (findMatchCase) {
-        matchCase.style.color = "blue";
-        matchCase.style['font-weight'] = "bold";
-      } else {
-        matchCase.style.color = "black";
-        matchCase.style['font-weight'] = "";
-      }
-      webview.find(document.forms['find-form']['find-text'].value,
-                   {matchCase: findMatchCase});
-    }
-
-    document.querySelector('#find-backward').onclick = function(e) {
-      e.preventDefault();
-      webview.find(document.forms['find-form']['find-text'].value,
-                   {backward: true, matchCase: findMatchCase});
-    }
-
-    document.querySelector('#find-form').onsubmit = function(e) {
-      e.preventDefault();
-      webview.find(document.forms['find-form']['find-text'].value,
-                   {matchCase: findMatchCase});
-    }
-
-    webview.addEventListener('findupdate', handleFindUpdate);
-    window.addEventListener('keydown', handleKeyDown);
-  } else {
-    var zoom = document.querySelector('#zoom');
-    var find = document.querySelector('#find');
-    zoom.style.visibility = "hidden";
-    zoom.style.position = "absolute";
-    find.style.visibility = "hidden";
-    find.style.position = "absolute";
-  }
+  });
 };
 
 function navigateTo(url) {

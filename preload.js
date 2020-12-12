@@ -72,7 +72,7 @@ contextBridge.exposeInMainWorld(
                return {
                  "revision": `${data.metadata.century}${dateArray[0]}_${Month.toLowerCase()}_rev_${dateArray[2]}`,
                  "flags": {
-                    "testing": data.metadata.flags.testing,
+                    "branch": data.metadata.flags.branch,
                     "homepage": data.metadata.flags.homepage
                  },
                  "version": {

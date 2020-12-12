@@ -1,12 +1,12 @@
 {
   "name": "visionbrowser",
-  "version": "20.12.1",
+  "version": "21.1.1",
   "metadata": {
-    "api": "1.7.0",
+    "api": "2.0.0",
     "century": 20,
-    "packagedate": "12 December 2020",
+    "packagedate": "21 January 2021",
     "flags": {
-      "testing": false,
+      "branch": "v2",
       "special": false,
       "homepage": "https://web.tabliss.io/"
     }
