@@ -4,14 +4,14 @@ A minimal web browser. Created using Electron.
 **In its current state, Vision is very basic and full of bugs & glitches. I *DON'T* suggest using this browser for any serious use.** That being said, if you *do* decide to use it, Vision is currently much more suitable as a single-purpose utility as it does not currently support multiple tabs (and will probably not until a viable solution is found, without being too inefficient). An example of using Vision as a single-purpose utility would be for something like digital signage.
 
 ## Project Information
-You can visit Vision's website [here](https://vision.saturdaynightdead.xyz). We're also looking for developers and testers, you can click [on this](https://vision.saturdaynightdead.xyz/careers) to find out more!
+You can visit Vision's website [here](https://vision.squared.bean.codes). We're also looking for developers and testers, you can click [on this](https://vision.squared.bean.codes/careers) to find out more!
 
 ## Where are the docs?
 There isn't really documentation for how to use the browser, because it should really be straight forward. Although, we do have some custom links for Vision (as well as a protocol API for versions 20.04.03 and higher).
 
 vision://about opens a window that shows information about the release and stuff. Kinda like Chrome's--Actually, we did copy the page source from Chromium's, but we modified it (of course).
 
-Anyway, that being said, if you're a developer (or even just some consumer) who wants to modify Vision. you can visit [this repo](https://github.com/BeanedTaco/vision-tools) to access tools so you can rebuild the browser. You can find documentation for Vision's API [here](https://vision.saturdaynightdead.xyz/docs).
+Anyway, that being said, if you're a developer (or even just some consumer) who wants to modify Vision. you can visit [this repo](https://github.com/BeanedTaco/vision-tools) to access tools so you can rebuild the browser. You can find documentation for Vision's API [here](https://vision.squared.bean.codes/docs).
 
 ## Version numbers
 Each release of Vision uses *two* version identifiers/numbers.

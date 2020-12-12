@@ -61,7 +61,6 @@ about:version template page
 
           .breadcrumb,
           .breadcrumb:last-child {
-              color: #343434;
               font-size: 0.9em;
           }
 
@@ -152,6 +151,7 @@ about:version template page
               vertical-align: bottom;
           }
       </style>
+      <script src="./utils/about.js"></script>
       <div id="title-bar" class="grey lighten-2">
           <div id="title" class="window-button">
               <a class="breadcrumb">About Vision</a>
@@ -163,18 +163,19 @@ about:version template page
       <div id="outer">
           <div id="logo">
               <picture>
-                  <img src="https://i.imgur.com/CanlOtp.png">
+                  <img width="128" height="128" src="https://i.imgur.com/CanlOtp.png">
               </picture>
 
 
-              <div id="company">Made with love and care by SaturdayNightDead</div>
-              <div id="copyright"> (credits to hokein on GitHub for creating the base webView implementation that I could not create with BrowserView). Available on <a href="https://github.com/beanedtaco/vision">GitHub</a>.</div>
+              <div id="company">Made with love and care by Squared Labs</div>
+              <br>
+              <div id="copyright">2020, Squared Labs. Available on <a href="https://github.com/Squared-Labs/vision">GitHub</a>.<br><br>The initial WebView implementation was created by <a href="https://github.com/hokein">hokein</a> back in July of 2015, and was used as a base for Vision itself.</div>
           </div>
           <table id="inner" cellpadding="0" cellspacing="0">
               <tr>
                   <td class="label">Vision Browser</td>
                   <td class="version" id="version">
-                      <span>v20.04.05 (APIv1.6.0)</span>
+                      <span id="versionStr"></span>
                       (<span>Official Build</span>)
                       <span></span>
                       <span>(Universal (64-bit + 32-bit) builds</span>
@@ -186,7 +187,7 @@ about:version template page
               <tr>
                   <td class="label">Revision</td>
                   <td class="version">
-                      <span>2020_april_rev_05</span>
+                      <span></span>
                   </td>
               </tr>
 
@@ -196,15 +197,15 @@ about:version template page
               <tr>
                   <td class="label">JavaScript</td>
                   <td class="version" id="js_engine">
-                      <span>Node.js V8</span>
-                      <span>[Bundled with Electron]</span>
+                      <span></span>
+                      <span></span>
                   </td>
               </tr>
 
               <tr>
                   <td class="label">Package Date</td>
                   <td class="version" id="Package Date">
-                      <span>2 April 2020</span>
+                      <span></span>
                   </td>
               </tr>
 

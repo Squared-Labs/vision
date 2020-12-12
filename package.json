@@ -1,7 +1,16 @@
 {
   "name": "visionbrowser",
-  "version": "20.4.5",
-  "description": "Simple and minimalist browser",
+  "version": "20.12.1",
+  "metadata": {
+    "api": "1.7.0",
+    "century": 20,
+    "packagedate": "12 December 2020",
+    "flags": {
+      "testing": false,
+      "special": false
+    }
+  },
+  "description": "Simple and minimalist browser created in Electron",
   "main": "main.js",
   "scripts": {
     "start": "npx electron .",
@@ -9,33 +18,31 @@
     "publish": "build --win -p never",
     "postinstall": "electron-builder install-app-deps"
   },
-  "repository": "https://github.com/BeanedTaco/vision",
+  "repository": "https://github.com/Squared-Labs/vision",
   "keywords": [
     "Browser",
     "Made with Electron",
     "Vision Browser"
   ],
-  "author": "The Vision Project",
+  "author": "Squared Labs",
   "contributors": [
-    "SaturdayNightDead <danny@saturdaynightdead.xyz> (https://saturdaynightdead.xyz)",
+    "SaturdayNightDead <hello@bean.codes> (https://bean.codes)",
     "trentanator09 (https://www.reddit.com/user/trentanator09)"
   ],
   "license": "MIT",
   "devDependencies": {
-    "electron": "^8.2.4",
-    "electron-builder": "^22.4.1",
-    "electron-packager": "^14.2.1"
+    "electron": "^11.1.0",
+    "electron-builder": "^22.9.1",
+    "electron-packager": "^15.2.0"
   },
   "dependencies": {
-    "discord.js": "^12.1.1",
-    "electron-squirrel-startup": "^1.0.0",
     "electron-tabs": "^0.15.0",
-    "electron-updater": "^4.2.5",
+    "electron-updater": "^4.3.5",
     "favicon-getter": "^1.1.3",
-    "v8-compile-cache": "^2.1.0"
+    "v8-compile-cache": "^2.2.0"
   },
   "build": {
-    "appId": "com.visionproject.vision",
+    "appId": "com.squaredlabs.vision",
     "productName": "Vision Browser",
     "asar": false,
     "publish": [
@@ -61,7 +68,7 @@
       "license": "build/license.txt",
       "language": "2057",
       "shortcutName": "Vision Browser",
-      "menuCategory": "The Vision Project"
+      "menuCategory": "Squared Labs"
     }
   }
 }

@@ -7,7 +7,7 @@
 */
 
 // Load Electron modules
-const { app, BrowserWindow, BrowserView, globalShortcut, Menu, screen, MenuItem, ipcMain } = require('electron')
+const { app, BrowserWindow, globalShortcut,  ipcMain, Notification } = require('electron')
 
 const {autoUpdater} = require("electron-updater");
 const path = require('path')
@@ -18,7 +18,6 @@ require('v8-compile-cache');
 
 app.on('ready', function () {
     autoUpdater.checkForUpdatesAndNotify();
-    
 });
 
 
@@ -36,9 +35,17 @@ app.on('ready', () => {
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
-    })
+    });
+    if (Notification.isSupported() && require("./package.json").metadata.flags.testing == true) {
+        new Notification({
+            "title": "Beta Usage Warning",
+            "body": "Please note that this is a beta build. Use with caution, and report any bugs or glitches.",
+            "silent": false
+        }).show()
+    }
 
     // Load browser
+
     mainWindow.loadFile('browser.html')
     globalShortcut.register('Control+Shift+I', () => {
         return mainWindow.webContents.executeJavaScript(`
@@ -77,21 +84,22 @@ app.on('ready', () => {
 
 
     // Window Creation End
-
     // Functions
     ipcMain.on('about', (e, message) => {
         console.log('Opening vision://about window..', e, message);
-
         const aboutWindow = new BrowserWindow({
             width: 1024,
             height: 512,
             frame: false,
             show: true,
             webPreferences: {
+                webviewTag: false,
+                nodeIntegration: false,
+                enableRemoteModule: false,
+                contextIsolation: true,
                 preload: path.join(__dirname, 'preload.js')
             }
         })
-
         aboutWindow.loadFile('version.html')
     });
 
@@ -108,6 +116,10 @@ app.on('ready', () => {
                     document.getElementsByTagName('webview')[0].reload();
             }
         `)
+    });
+
+    ipcMain.on('reloadMain', (e, message) => {
+        mainWindow.webContents.reload();
     });
 
 

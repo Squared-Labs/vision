@@ -26,6 +26,13 @@ onload = function() {
   var webview = document.querySelector('webview');
   doLayout();
 
+  visionApi.information.getMetadata().then(md => {
+    document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main}</a>`
+    if (md.flags.testing == true) {
+      alert("!WARNING! This is a testing build. Please use with caution.")
+      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} || Development Ring</a>`
+    }
+  });
   document.querySelector('#back').onclick = function() {
     visionApi.webFunctions.back();
   };

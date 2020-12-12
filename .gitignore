@@ -4,3 +4,4 @@ dist
 .vs
 *.zip
 *.bat
+package-lock.json
