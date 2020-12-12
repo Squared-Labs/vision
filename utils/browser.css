@@ -15,7 +15,7 @@ body {
   
   #title-bar {
     -webkit-app-region: drag;
-    height: 30px;
+    height: 36px;
     padding: none;
     margin: 0px;
   }
@@ -72,8 +72,8 @@ body {
   }
   
   #controls {
-    padding-top: 3px;
-    padding-bottom: 19px;
+    padding-top: 6px;
+    padding-bottom: 30px;
     border-bottom: solid 15px #ccc;
     background-color: #eee;
   }

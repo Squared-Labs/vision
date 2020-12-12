@@ -28,13 +28,6 @@ app.on('ready', () => {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-    if (Notification.isSupported() && require("./package.json").metadata.flags.testing == true) {
-        new Notification({
-            "title": "Beta Usage Warning",
-            "body": "Please note that this is a beta build. Use with caution, and report any bugs or glitches.",
-            "silent": false
-        }).show()
-    }
 
     // Load browser
     const webpage = new BrowserView();
@@ -43,13 +36,6 @@ app.on('ready', () => {
         return mainWindow.webContents.executeJavaScript(`
     document.getElementsByTagName("webview")[0].openDevTools();
     `)
-    })
-
-    globalShortcut.register('Control+R', () => {
-        return
-        //return mainWindow.webContents.executeJavaScript(`
-        //document.getElementsByTagName("webview")[0].reload();
-        //`)
     })
 
     globalShortcut.register('Control+W', () => {
@@ -87,13 +73,8 @@ app.on('ready', () => {
     });
 
     ipcMain.on('reload', (e, message) => {
-        mainWindow.webContents.executeJavaScript(`
-            var isLoading = false;
-            if (isLoading) {
-                    document.getElementsByTagName('webview')[0].stop();
-            } else {
-                    document.getElementsByTagName('webview')[0].reload();
-            }
+        return mainWindow.webContents.executeJavaScript(`
+            navigateTo()
         `)
     });
 

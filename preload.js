@@ -6,6 +6,7 @@
 */
 
 const { contextBridge, ipcRenderer } = require('electron');
+const request = require("request");
 
 contextBridge.exposeInMainWorld(
     "api", {
@@ -71,7 +72,8 @@ contextBridge.exposeInMainWorld(
                return {
                  "revision": `${data.metadata.century}${dateArray[0]}_${Month.toLowerCase()}_rev_${dateArray[2]}`,
                  "flags": {
-                    "testing": data.metadata.flags.testing
+                    "testing": data.metadata.flags.testing,
+                    "homepage": data.metadata.flags.homepage
                  },
                  "version": {
                     "main": data.version,

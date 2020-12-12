@@ -7,7 +7,8 @@
 */
 
 const visionApi = window.api
-
+let startingAddress = "https://web.tabliss.io/";
+let webAddress = startingAddress
 window.onresize = doLayout;
 var isLoading = false;
 
@@ -24,8 +25,8 @@ function devTools() {
 
 onload = function() {
   var webview = document.querySelector('webview');
+  webview.setAttribute("src", startingAddress)
   doLayout();
-
   visionApi.information.getMetadata().then(md => {
     document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main}</a>`
     if (md.flags.testing == true) {
@@ -42,7 +43,7 @@ onload = function() {
   };
 
   document.querySelector('#home').onclick = function() {
-    navigateTo('https://web.tabliss.io/');
+    navigateTo(startingAddress);
   };
 
   document.querySelector('#reload').onclick = function() {
@@ -177,14 +178,12 @@ function navigateTo(url) {
         document.querySelector('webview').src = url;
     } else if (http === 'http://') {
         document.querySelector('webview').src = url;
-        // mainWindow.webContents.openDevTools();
     } else if (visionProtocol === 'vision://about') {
         visionProtocolHandoff(url)
     } else {
         document.querySelector('webview').src = 'http://google.com/search?q=' + url;
     }
-}
-
+  }
 
 function visionProtocolHandoff(url) {
     let entry = url.slice(0, url.length).toLowerCase();
@@ -318,10 +317,8 @@ function handleLoadStop(event) {
 }
 
 function handleLoadAbort(event) {
-  console.log('LoadAbort');
-  console.log('  url: ' + event.url);
-  console.log('  isTopLevel: ' + event.isTopLevel);
-  console.log('  type: ' + event.type);
+  document.querySelector('webview').executeJavaScript("window.close()")
+  document.getElementById("err").innerText = "The webpage failed to load. This can be caused by multiple things, but the most common reason is that you entered the wrong URL. Try entering the URL again. If you think this was a mistake, try again later."
 }
 
 function handleLoadRedirect(event) {
@@ -406,7 +403,16 @@ document.addEventListener('keydown',function(e){
       case 'KeyI':
         document.getElementsByTagName("webview")[0].openDevTools();
         break;
+    }
+  }
 
+  //CTRL + something
+  if(e.ctrlKey){
+    switch(e.code){
+
+      case 'KeyR':
+        visionApi.webFunctions.reload()
+        break;
     }
   }
 

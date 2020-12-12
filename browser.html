@@ -25,20 +25,23 @@
 
         <form id="location-form">
             <div id="center-column">
-                <input id="location" type="text" value="https://web.tabliss.io/">
+                <input id="location" type="text" value="">
             </div>
             <input type="submit" value="&#128270;">
         </form>
     </div>
 
-  <webview src="https://web.tabliss.io/" preload="file://${__dirname}/webview-preload.js"></webview>
+  <webview id="webpage" src="about:blank" preload="file://${__dirname}/webview-preload.js"></webview>
 
     <div id="sad-webview">
-      <div id="sad-webview-icon">&#9762;</div>
+      <div id="sad-webview-icon">&#128163;</div>
       <h2 id="crashed-label">Oops!</h2>
-      <h2 id="killed-label">He fell into a snag.</h2>
+      <h2 id="killed-label">CRITICAL ERROR!</h2>
 
-      <p>Oopsie poopsies! Wumpus fell into a snag, yeesh. Anyways, this webpage couldn't load. Refresh the page, go to a different page, or try again.</p>
+      <p>Oops! The engine went into a snag. Here's some handy-dandy information below just in case you want to go into the nitty-gritty of the issue.</p>
+      <br>
+      <br>
+      <p id="err"></p>
     </div>
   </body>
 </html>
