@@ -22,8 +22,8 @@ app.on('ready', () => {
         show: true,
         webPreferences: {
             webviewTag: true,
-            nodeIntegration: true,
-            enableRemoteModule: true,
+            nodeIntegration: false,
+            enableRemoteModule: false,
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
