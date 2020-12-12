@@ -39,5 +39,5 @@ Then, for versions v20.02.02/APIv1.0.0.2 to v20.04.01/APIv1.2.0, the package.jso
 
 *However*, for versions v20.02.01/APIv1.0.0 and v20.02.02, the package.json versions are presented using the *Y-M-R* version number, followed by the *semantic* ___major___ version number. For example, v20.02.02's package.json version is ``v20.02.02 (base v1)``.
 
-## What happened to original v2 plans?
-Vision is now in the EOIL stage of life, meaning that there will no longer be any new improvements for Vision, and the EOL date will be sometime in June or July.
+## When is v2 being released?
+Version 2 of Vision is set to be released in late January 2021, but this is not a final date.
