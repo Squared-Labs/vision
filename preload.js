@@ -70,7 +70,7 @@ contextBridge.exposeInMainWorld(
                if (dateArray[1] == "11") Month = "November";
                if (dateArray[1] == "12") Month = "December";
                return {
-                 "revision": `${data.metadata.century}${dateArray[0]}_${Month.toLowerCase()}_rev_${dateArray[2]}`,
+                 "revision": `${data.metadata.century}${dateArray[0]}_${Month.toLowerCase()}_rev_0${dateArray[2]}`,
                  "flags": {
                     "branch": data.metadata.flags.branch,
                     "homepage": data.metadata.flags.homepage
