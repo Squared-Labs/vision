@@ -1,0 +1,44 @@
+{
+    "appId": "com.squaredlabs.vision",
+    "productName": "Vision Browser",
+    "asar": false,
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "BeanedTaco",
+        "repo": "vision"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "publish": "github",
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "linux": {
+            "target": [
+                "deb",
+                "rpm",
+                "tar.gz",
+                "appimage"
+            ],
+            "maintainer": "The Vision Project",
+            "vendor": "Squared Labs",
+            "category": "Network"
+    },
+    "deb": {
+        "synopsis": ""
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "license": "build/license.txt",
+      "language": "2057",
+      "shortcutName": "Vision Browser",
+      "menuCategory": "Squared Labs"
+    }
+  }

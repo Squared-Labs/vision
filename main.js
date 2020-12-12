@@ -7,22 +7,14 @@
 */
 
 // Load Electron modules
-const { app, BrowserWindow, globalShortcut,  ipcMain, Notification } = require('electron')
+const { app, BrowserWindow, globalShortcut, ipcMain, Notification, BrowserView } = require('electron')
 
 const {autoUpdater} = require("electron-updater");
 const path = require('path')
 require('v8-compile-cache');
 
-
-
-
-app.on('ready', function () {
-    autoUpdater.checkForUpdatesAndNotify();
-});
-
-
-
 app.on('ready', () => {
+    autoUpdater.checkForUpdatesAndNotify();
     const mainWindow = new BrowserWindow({
         width: 1024,
         height: 1024,
@@ -30,8 +22,8 @@ app.on('ready', () => {
         show: true,
         webPreferences: {
             webviewTag: true,
-            nodeIntegration: false,
-            enableRemoteModule: false,
+            nodeIntegration: true,
+            enableRemoteModule: true,
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
@@ -45,7 +37,7 @@ app.on('ready', () => {
     }
 
     // Load browser
-
+    const webpage = new BrowserView();
     mainWindow.loadFile('browser.html')
     globalShortcut.register('Control+Shift+I', () => {
         return mainWindow.webContents.executeJavaScript(`
@@ -71,19 +63,6 @@ app.on('ready', () => {
     const visionApi = mainWindow.webContents.api
 // Handback reference example:
 // visionApi.ipc.handback("example", responseObj);
-
-
-    // almost...
-
-    // OOP LETS CREATE A MENU
-
-    // OK DONE
-
-
-    // almost...
-
-
-    // Window Creation End
     // Functions
     ipcMain.on('about', (e, message) => {
         console.log('Opening vision://about window..', e, message);
