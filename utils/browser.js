@@ -40,7 +40,7 @@ onload = async function() {
   };
 
   document.querySelector('#reload').onclick = function() {
-    visionApi.webFunctions.reload();
+    navigateTo(webview.getURL());
   };
   document.querySelector('#reload').addEventListener(
     'webkitAnimationIteration',
@@ -65,9 +65,9 @@ onload = async function() {
   visionApi.information.getMetadata().then(md => {
     document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main}</a>`
     if (md.flags.branch == "testing") {
-      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} || Beta Ring, use with caution</a>`
+      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} (b${md.build})|| Beta Ring, use with caution</a>`
     } if (md.flags.branch == "v2") {
-      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} || VERSION 2 BUILD, USE WITH EXTREME CAUTION</a>`
+      document.getElementById("title").innerHTML = `<a class="breadcrumb id="title">Vision Browser v${md.version.main} (Build ${md.build}) || VERSION 2 BUILD, USE WITH EXTREME CAUTION</a>`
     }
   });
 };
@@ -83,7 +83,9 @@ function navigateTo(url) {
         document.querySelector('webview').src = url;
     } else if (http === 'http://') {
         document.querySelector('webview').src = url;
-    } else if (visionProtocol === 'vision://about') {
+    } else if (visionProtocol === 'vision:about') {
+        visionProtocolHandoff(url)
+    } else if (visionProtocol === 'vision:panic') {
         visionProtocolHandoff(url)
     } else {
         document.querySelector('webview').src = 'http://google.com/search?q=' + url;
@@ -92,8 +94,10 @@ function navigateTo(url) {
 
 function visionProtocolHandoff(url) {
     let entry = url.slice(0, url.length).toLowerCase();
-    if (entry === 'vision://about') {
+    if (entry === 'vision:about') {
         visionApi.ipc.handoff("about", "visionStamp")
+    } if (entry === 'vision:panic') {
+        visionApi.webFunctions.panic()
     }
 }
  // document.querySelector('webview').src = url;
@@ -223,7 +227,7 @@ function handleLoadStop(event) {
 
 function handleLoadAbort(event) {
   document.querySelector('webview').executeJavaScript("window.close()")
-  document.getElementById("err").innerText = "The webpage failed to load. This can be caused by multiple things, but the most common reason is that you entered the wrong URL. Try entering the URL again. If you think this was a mistake, try again later."
+  document.getElementById("err").innerText = "The webpage failed to load. Loading can fail for many reasons, but one common reason is that you typed the URL wrong. If you're sure that the URL is correct, then chances are that the page that you requested isn't working."
 }
 
 function handleLoadRedirect(event) {
@@ -307,16 +311,6 @@ document.addEventListener('keydown',function(e){
 
       case 'KeyI':
         document.getElementsByTagName("webview")[0].openDevTools();
-        break;
-    }
-  }
-
-  //CTRL + something
-  if(e.ctrlKey){
-    switch(e.code){
-
-      case 'KeyR':
-        visionApi.webFunctions.reload()
         break;
     }
   }

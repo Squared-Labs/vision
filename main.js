@@ -17,7 +17,9 @@ app.on('ready', () => {
     autoUpdater.checkForUpdatesAndNotify();
     const mainWindow = new BrowserWindow({
         width: 1024,
-        height: 1024,
+        height: 512,
+        minHeight: 512,
+        minWidth: 1024,
         frame: false,
         show: true,
         webPreferences: {
@@ -44,6 +46,12 @@ app.on('ready', () => {
 
     globalShortcut.register('Alt+Shift+I', () => {
         return mainWindow.webContents.openDevTools();
+    })
+
+    globalShortcut.register('Control+R', () => {
+        mainWindow.webContents.executeJavaScript(`
+        window.api.webFunctions.reload()
+        `)
     })
 
     const visionApi = mainWindow.webContents.api
@@ -73,9 +81,11 @@ app.on('ready', () => {
     });
 
     ipcMain.on('reload', (e, message) => {
-        return mainWindow.webContents.executeJavaScript(`
-            navigateTo()
-        `)
+        return mainWindow.webContents.executeJavaScript("navigateTo(`${document.getElementsByTagName('webview')[0].getURL()}`)")
+    });
+
+    ipcMain.on('panic', (e, message) => {
+        return mainWindow.webContents.executeJavaScript("document.getElementsByTagName('webview')[0].executeJavaScript(`window.close()`)")
     });
 
     ipcMain.on('reloadMain', (e, message) => {
